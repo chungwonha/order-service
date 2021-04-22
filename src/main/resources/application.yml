@@ -1,0 +1,9 @@
+server:
+  port: 9002
+  netty:
+    connection-timeout: 5s
+  shutdown: graceful
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 15s
