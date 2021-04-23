@@ -4,6 +4,8 @@ import reactor.core.publisher.Mono;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.time.Duration;
+
 @Service
 public class BookClient {
 
@@ -18,6 +20,7 @@ public class BookClient {
     public Mono<Book> getBookByIsbn(String isbn) {
         return webClient.get().uri(isbn)
                 .retrieve()
-                .bodyToMono(Book.class);
+                .bodyToMono(Book.class)
+                .timeout(Duration.ofSeconds(1),Mono.empty());
     }
 }
