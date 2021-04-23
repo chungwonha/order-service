@@ -1,5 +1,5 @@
 server:
-  port: 9002
+  port: 9003
   netty:
     connection-timeout: 5s
   shutdown: graceful
