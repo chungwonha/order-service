@@ -18,4 +18,6 @@ spring:
     user: ${spring.r2dbc.username}
     password: ${spring.r2dbc.password}
     url: jdbc:postgresql://localhost:5433/polardb_order
+polar:
+  catalogServiceUrl: "http://localhost:9001"
 
