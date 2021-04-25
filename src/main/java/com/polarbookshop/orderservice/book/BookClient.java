@@ -1,5 +1,6 @@
 package com.polarbookshop.orderservice.book;
 
+import org.slf4j.Logger;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 import org.springframework.stereotype.Service;
@@ -7,16 +8,19 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.util.retry.Retry;
 
 import java.time.Duration;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class BookClient {
-
+    Logger logger = LoggerFactory.getLogger(BookClient.class);
     private final WebClient webClient;
-
+    private String bookUrl;
     public BookClient(BookClientProperties bookClientProperties, WebClient.Builder webClientBuilder) {
+        System.out.println("bookClientProperties.getCatalogServiceUrl().toString(): "+bookClientProperties.getCatalogServiceUrl().toString());
         this.webClient = webClientBuilder
                 .baseUrl(bookClientProperties.getCatalogServiceUrl().toString())
                 .build();
+        this.bookUrl=bookClientProperties.getCatalogServiceBooksUrl();
     }
 
     /*
@@ -30,7 +34,9 @@ public class BookClient {
     the retry operator is not triggered.
      */
     public Mono<Book> getBookByIsbn(String isbn) {
-        return webClient.get().uri(isbn)
+        System.out.println("getBookByIsbn isbn: "+isbn);
+        System.out.println("webClient.get().toString(): "+webClient.get().toString());
+        return webClient.get().uri(this.bookUrl+isbn)
                 .retrieve()
                 .bodyToMono(Book.class)
                 .timeout(Duration.ofSeconds(1), Mono.empty())

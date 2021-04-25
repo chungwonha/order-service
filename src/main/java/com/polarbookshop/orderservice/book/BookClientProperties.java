@@ -14,4 +14,8 @@ public class BookClientProperties {
      */
     @NotNull
     private URI catalogServiceUrl;
+
+    @NotNull
+    private String catalogServiceBooksUrl;
+
 }
