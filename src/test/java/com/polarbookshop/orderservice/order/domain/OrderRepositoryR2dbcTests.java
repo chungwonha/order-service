@@ -26,7 +26,7 @@ class OrderRepositoryR2dbcTests {
 
     @Autowired
     private OrderRepository orderRepository;
-
+    //test comments
     @DynamicPropertySource
     //@DynamicPropertySource: Overwrite R2DBC and Flyway configuration to point to the test PostgreSQL instance
     static void postgresqlProperties(DynamicPropertyRegistry registry) {
