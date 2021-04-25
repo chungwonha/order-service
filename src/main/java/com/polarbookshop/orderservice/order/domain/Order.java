@@ -18,7 +18,7 @@ public class Order extends PersistableEntity {
     private Integer quantity;
     private OrderStatus status;
 
-    Order(String bookIsbn, int quantity, OrderStatus status) {
+    public Order(String bookIsbn, int quantity, OrderStatus status) {
         this.bookIsbn = bookIsbn;
         this.quantity = quantity;
         this.status = status;
